@@ -8,8 +8,6 @@ namespace ConsoleAppTester
 {
     public class Utils
     {
-        public static int[] OUTPUT_2 = new int[2] { 1, 0 };
-        public static int[] OUTPUT_3 = new int[2] { 0, 1 };
         /// <summary>
         /// Load a PNG and create a TF tensor out of it
         /// </summary>
@@ -34,15 +32,48 @@ namespace ConsoleAppTester
                 return tensor;
             }
         }
+        /// <summary>
+        /// Converts the TF result into a 10 dimensional vector
+        /// Silly repetitions here! I was running out of time.
+        /// </summary>
+        /// <param name="results"></param>
+        /// <returns></returns>
         internal static int[] Quantized(float[,] results)
         {
             int[] q = new int[]
             {
                 results[0,0]>0.5?1:0,
                 results[0,1]>0.5?1:0,
+                results[0,2]>0.5?1:0,
+                results[0,3]>0.5?1:0,
+                results[0,4]>0.5?1:0,
+                results[0,5]>0.5?1:0,
+                results[0,6]>0.5?1:0,
+                results[0,7]>0.5?1:0,
+                results[0,8]>0.5?1:0,
+                results[0,9]>0.5?1:0,
             };
             return q;
         }
-
+        /// <summary>
+        /// Given a digit , it returns the vectorized output in 10 dimensions
+        /// e.g. 
+        ///     0->0000000000
+        ///     1->0100000000
+        ///     2->0010000000
+        /// </summary>
+        /// <param name="iParentFolder"></param>
+        /// <returns></returns>
+        internal static int[] GetQuantizedExpectedVector(int iParentFolder)
+        {
+            int[] output = new int[10] {
+                    0,0,0,
+                    0,0,0,
+                    0,0,0,
+                    0
+            };
+            output[iParentFolder] = 1;
+            return output;
+        }
     }
 }

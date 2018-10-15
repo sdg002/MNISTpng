@@ -12,7 +12,6 @@ namespace ConsoleAppTester
         static void Main(string[] args)
         {
             Console.WriteLine("Specify full path to the trained TF model");
-            you ere here,
             //string modelfile = Console.ReadLine();
             string modelfile = @"C:\Users\saurabhd\MyTrials\MachineLearnings-2\MNISTpng\PythonTrainer\TrainedMnistTFModel.pb";
 
@@ -24,8 +23,9 @@ namespace ConsoleAppTester
 
         private static void TestMnistImagesUsingTrainedModel(string modelfile, string folderWithMNIST)
         {
-            string[] files = System.IO.Directory.GetFiles(folderWithMNIST, "*.png", System.IO.SearchOption.AllDirectories);
-            string[] files_2_3 = files.Where(file => file.Contains("\\2\\") || file.Contains("\\3\\")).ToArray();
+            Random rnd = new Random(DateTime.Now.Second);
+            string[] filesTesting = System.IO.Directory.GetFiles(folderWithMNIST, "*.png", System.IO.SearchOption.AllDirectories);
+            string[] filesTestingRandomized = filesTesting.OrderBy(f=> rnd.Next()).ToArray();// files.Where(file => file.Contains("\\2\\") || file.Contains("\\3\\")).ToArray();
 
             byte[] buffer = System.IO.File.ReadAllBytes(modelfile);
             int countOfFailedClassifications = 0;
@@ -34,7 +34,7 @@ namespace ConsoleAppTester
                 graph.Import(buffer);
                 using (var session = new TensorFlow.TFSession(graph))
                 {
-                    foreach (string file in files_2_3)
+                    foreach (string file in filesTestingRandomized)
                     {
                         Stopwatch sw = new Stopwatch();
                         sw.Start();
@@ -51,8 +51,12 @@ namespace ConsoleAppTester
                         /// Evaluate the results
                         ///
                         int[] quantized = Utils.Quantized(results);
+                        ///
+                        /// Use the parent folder name to deterimine the expected digit
+                        ///
                         string parentFolder = System.IO.Directory.GetParent(file).Name;
-                        int[] expected = (parentFolder == "2") ? Utils.OUTPUT_2 : Utils.OUTPUT_3;
+                        int iParentFolder = int.Parse(parentFolder);
+                        int[] expected = Utils.GetQuantizedExpectedVector(iParentFolder);
                         bool success = quantized.SequenceEqual(expected);
                         if (!success) countOfFailedClassifications++;
                         string message = $"Directory={parentFolder}    File={System.IO.Path.GetFileName(file)}    Bit1={results[0, 0]} Bit2={results[0, 1]}   Elapsed={sw.ElapsedMilliseconds} ms, Success={success}";
@@ -60,7 +64,7 @@ namespace ConsoleAppTester
                     }
                 }
             }
-            double totalfiles = files_2_3.Length;
+            double totalfiles = filesTestingRandomized.Length;
             double overallsuccess = 100.0 * (totalfiles - countOfFailedClassifications) / totalfiles;
             Console.WriteLine($"total failures={countOfFailedClassifications} out of {totalfiles} files, success%={overallsuccess}");
         }

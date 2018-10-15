@@ -2,6 +2,7 @@ import numpy as np
 import glob
 import cv2
 from keras.utils import np_utils
+import os.path
 
 #
 #Load an image using the specified path. opencv needed
@@ -23,14 +24,21 @@ def load_images(path_in):
         labels=[] #labels for each training file
         filenames = glob.glob(path_in)
         for filename in filenames:
-                if ("\\2\\" in filename):
-                        labels.append(0)			
-                        img = get_im(filename)
-                        images.append(img)          
-                elif ("\\3\\" in filename):
-                        labels.append(1)
-                        img = get_im(filename)
-                        images.append(img)
+                #get the parent folder from the full path of the file /mnist/blah/training/3/34348.png
+                fulldir=os.path.dirname(filename)
+                parentfolder=os.path.basename(fulldir)
+                imagelabel=int(parentfolder)
+                labels.append(imagelabel)
+                img = get_im(filename)
+                images.append(img)
+                # if ("\\2\\" in filename):
+                #         labels.append(0)			
+                #         img = get_im(filename)
+                #         images.append(img)          
+                # elif ("\\3\\" in filename):
+                #         labels.append(1)
+                #         img = get_im(filename)
+                #         images.append(img)
         return images,labels
 
 #

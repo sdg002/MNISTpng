@@ -22,14 +22,13 @@ import time
 from MnistImageLoader import load_images,ReShapeData
 
 
-x=100
 #
 #The following variables should be set to the folder where MNIST images have been extracted 
 #
 cat_dog_train_path_50="C:\\Users\\saurabhd\\MyTrials\\MachineLearnings\\MNIST101\\mnist_png_50\\*\\*.png"
 cat_dog_train_path_full="C:\\Users\\saurabhd\\MyTrials\\MachineLearnings\\MNIST101\\mnist_png\\training\\*\\*.png"
 cat_dog_test_path="C:\\Users\\saurabhd\\MyTrials\\MachineLearnings\\MNIST101\\mnist_png\\testing\\*\\*.png"
-nb_classes = 2
+nb_classes = 10 #we have these many digits in our training
 #
 #Load training images
 #
