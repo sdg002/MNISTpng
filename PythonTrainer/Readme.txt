@@ -20,7 +20,7 @@ the location of the folder in Step 1, you will need to change the variable value
 
 Outcome of Step 2
 -----------------
-	Step 2 will product 
+	Step 2 will produce 
 		1)Model file (JSON)
 		2)Weights file (H5)
 Step 3
