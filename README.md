@@ -1,3 +1,5 @@
+# MNIST - From Python to C#
+
 # What is this project about?
 A sample end to end project demonstrating how to train MNIST images using Keras/Tensforflow and then write a C# application using the TensorFlowSharp nuget package to load the trained model and evaluate images at runtime.
 
