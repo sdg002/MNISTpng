@@ -1,5 +1,5 @@
 This is a set of Python scripts which will use Keras and TF train MNIST using PNG files
-----------------------------------------------------------------------------------------
+***************************************************************************************
 
 What does this script produce?
 ------------------------------
