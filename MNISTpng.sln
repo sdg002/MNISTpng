@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MNISTpng", "MNISTpng\MNISTpng.csproj", "{695F788F-C86C-41C2-88F4-AD29AD59E4EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PythonTrainer", "PythonTrainer\PythonTrainer.csproj", "{395632FD-A617-4121-BD92-DD00ED409E79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppTester", "ConsoleAppTester\ConsoleAppTester.csproj", "{D3961E4F-2A5E-4842-9656-857FC11DA059}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{695F788F-C86C-41C2-88F4-AD29AD59E4EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{695F788F-C86C-41C2-88F4-AD29AD59E4EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{695F788F-C86C-41C2-88F4-AD29AD59E4EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{395632FD-A617-4121-BD92-DD00ED409E79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{395632FD-A617-4121-BD92-DD00ED409E79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{395632FD-A617-4121-BD92-DD00ED409E79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{395632FD-A617-4121-BD92-DD00ED409E79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3961E4F-2A5E-4842-9656-857FC11DA059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3961E4F-2A5E-4842-9656-857FC11DA059}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3961E4F-2A5E-4842-9656-857FC11DA059}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3961E4F-2A5E-4842-9656-857FC11DA059}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
