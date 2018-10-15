@@ -11,13 +11,12 @@ namespace ConsoleAppTester
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Specify full path to the trained TF model");
-            //string modelfile = Console.ReadLine();
-            string modelfile = @"C:\Users\saurabhd\MyTrials\MachineLearnings-2\MNISTpng\PythonTrainer\TrainedMnistTFModel.pb";
+            Console.WriteLine("Specify full path to the trained TF model. This would be a .PB file produced using Python scripts");
+            string modelfile = Console.ReadLine();            
 
-            Console.WriteLine("Specify the top level folder which contains the MNIST test images");
-            //string folderWithMNIST = Console.ReadLine();
-            string folderWithMNIST = @"C:\Users\saurabhd\MyTrials\MachineLearnings\MNIST101\mnist_png\testing";
+            Console.WriteLine("Specify the top level folder which contains the MNIST test images. The complete MNIST dump is in the accompanying Github project.");
+            string folderWithMNIST = Console.ReadLine();  
+            
             TestMnistImagesUsingTrainedModel(modelfile, folderWithMNIST);
         }
 
@@ -25,7 +24,7 @@ namespace ConsoleAppTester
         {
             Random rnd = new Random(DateTime.Now.Second);
             string[] filesTesting = System.IO.Directory.GetFiles(folderWithMNIST, "*.png", System.IO.SearchOption.AllDirectories);
-            string[] filesTestingRandomized = filesTesting.OrderBy(f=> rnd.Next()).ToArray();// files.Where(file => file.Contains("\\2\\") || file.Contains("\\3\\")).ToArray();
+            string[] filesTestingRandomized = filesTesting.OrderBy(f=> rnd.Next()).ToArray();
 
             byte[] buffer = System.IO.File.ReadAllBytes(modelfile);
             int countOfFailedClassifications = 0;
