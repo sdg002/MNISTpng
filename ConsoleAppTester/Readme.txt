@@ -12,4 +12,4 @@ Other requirements
 ------------------
 64 bit.
 
-C# application that will consume the TF model produced by PythonTrainer
+
