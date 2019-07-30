@@ -1,9 +1,13 @@
-﻿This is a Python script which will use Keras and TF train MNIST using PNG files
+This is a set of Python scripts which will use Keras and TF train MNIST using PNG files
+***************************************************************************************
+
+What does this script produce?
+------------------------------
+A Keras model which can be consumed by other applications (e.g. a C# application for classifying images at runtime)
 
 
 How to train?
 -------------
-
 
 Step 1
 ------
@@ -16,14 +20,15 @@ the location of the folder in Step 1, you will need to change the variable value
 
 Outcome of Step 2
 -----------------
-	Step 2 will product 
-		1)Model file (json)
-		2)Weights file (h5)
+	Step 2 will produce 
+		1)Model file (JSON)
+		2)Weights file (H5)
 Step 3
 ------
 	Convert the Keras model to a file that TF can understand. 
 	Execute the script ConvertKerasToTF.bat
+	This will produce a .PB file - which contains both the neural network structure and weights.
 
 Step 4
 ------
-	Run the C# console application which will consume the trained model and then evaluate the test images
+	Move on to the step of consuming the model file in a C# console application.
