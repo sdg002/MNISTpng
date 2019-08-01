@@ -73,7 +73,10 @@ License:     Enter the license (<a href="http://www.codeproject.com/info/license
             <a href="#intro">Introduction</a>
         </li>
         <li>
-            <a href="#mnist">What is MNIST?</a>
+            <a href="#back">Background</a>
+        </li>
+        <li>
+            <a href="#mnist">What is MNIST? Why MNIST</a>
         </li>
         <li>
             <a href="#tensorflow">About Tensorflow</a>
@@ -81,11 +84,36 @@ License:     Enter the license (<a href="http://www.codeproject.com/info/license
         <li>
             <a href="#tensorflowsharp">About TensorflowSharp</a>
         </li>
+        <li>
+            <a href="#tensorflowgpu">Using Tensorflow with GPU</a>
+        </li>
+        <li>
+            <a href="#csharpconsole">Using Tensorflow in a C# console application</a>
+            <ul>
+                <li><a href="#csharpconsole_overview">Overview</a></li>
+                <li><a href="#csharpconsole_create">Create a console application</a></li>
+                <li><a href="#csharpconsole_loadmodel">Load the trained model file</a></li>
+                <li><a href="#csharpconsole_evaluateimage">Load the test image and evaluate using TensorflowSharp</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#usingthecode">Using the code</a>
+        </li>
     </ul>
 
     <h2><a id="intro"></a>Introduction - The problem we are trying to solve?</h2>
     <p>TODO why it's useful, the problem it solves etc. </p>
     <p>Show block diagram of Web application</p>
+    <p>TODO Train using Python , use .NET during production</p>
+    <h2 id="back">Background</h2>
+    <p>
+        I have used Python for training a CNN model and then C# to build a client application. A basic knowlege of C#, NUGET and Python would be very helpful.        
+        I have used <strong>Visual Studio 2017</strong> for the simple Console application and <strong>Visual Studio Code for Python(1.36.1)</strong> training scripts.
+        In this article I have used the GPU version of the Tensorflow for to improve the speed of learning. You would need  a <strong>GPU</strong> enabled desktop.
+        The reader is cautioned that coding with the GPU requires additional CUDA libraries and drivers to be installed. This article also assumes that the reader
+        is familiar with the basic principles of <strong>Deep Convolution Neural Networks</strong>.
+    </p>
+    
 
     <h2><a id="mnist"></a> What is MNIST? Why MNIST?</h2>
     <p>TODO Show pic of MNIST</p>
@@ -94,8 +122,7 @@ License:     Enter the license (<a href="http://www.codeproject.com/info/license
     <h2><a id="tensorflow"></a> About TensorFlow</h2>
 
     <p>
-        (Optional) Is there any background to this article that may be useful such
-        as an introduction to the basic ideas presented?
+        TODO Show some pictures about TF. Some background on TF
     </p>
 
 
@@ -103,7 +130,7 @@ License:     Enter the license (<a href="http://www.codeproject.com/info/license
     <p>TODO Talk about Tensorflow</p>
 
 
-    <h2>Using Tensorflow with GPU</h2>
+    <h2 id="tensorflowgpu">Using Tensorflow with GPU</h2>
     <p>
         TODO Talk about all the steps neccessary for using GPU
     </p>
@@ -113,12 +140,45 @@ License:     Enter the license (<a href="http://www.codeproject.com/info/license
         TODO Show python script
     </p>
 
+    <h2 id="csharpconsole">C# console application</h2>
+    <h3 id="csharpconsole_overview">Overview</h3>
+    <pre>
+        -----------------------
+        1)Load trained model file
+        -----------------------
+                |
+                |
+        -----------------
+        2)Load test images
+        -----------------
+                |
+                |
+        -----------------------------------
+        3)Evaluate the test image using CNN
+        -----------------------------------
 
-    <hr />
+    </pre>
+    <h3 id="csharpconsole_create">Create a Console application</h3>
+    <ul>
+        <li>
+            Create a new Console application using .NET Framework
+        </li>
+        <li>
+            Add NUGET package reference to TensorflowSharp
+        </li>
+    </ul>
+    <h3 id="csharpconsole_loadmodel">Load the trained model file</h3>
+    <pre>
+        TODO Show code snippet
+    </pre>
+
+    <h3 id="csharpconsole_evaluateimage">Load the test image and evaluate using TensorFlowSharp</h3>
+    <pre>
+        TODO Show code snippet
+    </pre>
 
 
-
-    <h2>Using the code</h2>
+    <h2 id="usingthecode">Using the code</h2>
 
     <p>
         A brief description of how to use the article or code. The class names, the
@@ -127,11 +187,6 @@ License:     Enter the license (<a href="http://www.codeproject.com/info/license
 
     <p>Blocks of code should be set as style &quot;Formatted&quot; like this: </p>
 
-<pre>//
-// Any source code blocks look like this
-//
-var i = 0;
-...</pre>
 
     <p>Remember to set the Language of your code snippet using the Language dropdown. </p>
 
