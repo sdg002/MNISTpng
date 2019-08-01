@@ -51,9 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ConvertKerasToTF.bat" />
-    <None Include="TrainedMnistModel.json" />
-    <None Include="TrainedMnistModelWts.h5" />
-    <None Include="TrainedMnistTFModel.pb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

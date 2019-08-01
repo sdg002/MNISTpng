@@ -125,24 +125,24 @@ print("Testing on test data")
     verbose = 1)
 
 # Print the model's accuracy
-print(accuracy)
+print("Accuracy="+ str(accuracy))
 #
-#Save the model
+#You could save the model to individual files 
 #
-model_json = model.to_json()
-filenameModel="TrainedMnistModel.json"
-with open(filenameModel,"w") as modelf:
-	modelf.write(model_json)
-print("Model written to file:" + filenameModel);
-
-# serialize weights to HDF5
-filenameWeights="TrainedMnistModelWts.h5"
-model.save_weights(filenameWeights)
-print("Weights were saved to file:" + filenameWeights);
+# model_json = model.to_json()
+# filenameModel="TrainedMnistModel.json"
+# with open(filenameModel,"w") as modelf:
+# 	modelf.write(model_json)
+# print("Model written to file:" + filenameModel);
 #
-#Saving as a single file (model+weights)
-#
-model.save("SingleFile.h5") #this saves but the PB file does not work using C#
+# # serialize weights to HDF5
+# filenameWeights="TrainedMnistModelWts.h5"
+# model.save_weights(filenameWeights)
+# print("Weights were saved to file:" + filenameWeights);
+# #
+# #Saving as a single file (model+weights)
+# #
+# model.save("SingleFile.h5") #this saves but the PB file does not work using C#
 
 #
 #Saving using Freeze approach https://stackoverflow.com/questions/45466020/how-to-export-keras-h5-to-tensorflow-pb
@@ -150,4 +150,4 @@ model.save("SingleFile.h5") #this saves but the PB file does not work using C#
 
 frozen_graph = freeze_session(K.get_session(),
                               output_names=[out.op.name for out in model.outputs])
-tf.train.write_graph(frozen_graph, "some_directory", "my_model.pb", as_text=False)
+tf.train.write_graph(frozen_graph, "Out", "Mnist_model.pb", as_text=False)
