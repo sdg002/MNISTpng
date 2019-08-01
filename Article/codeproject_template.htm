@@ -79,6 +79,9 @@ License:     Enter the license (<a href="http://www.codeproject.com/info/license
             <a href="#mnist">What is MNIST? Why MNIST</a>
         </li>
         <li>
+            <a href="#deeplearning">Deep learning</a>
+        </li>
+        <li>
             <a href="#tensorflow">About Tensorflow</a>
         </li>
         <li>
@@ -99,25 +102,89 @@ License:     Enter the license (<a href="http://www.codeproject.com/info/license
         <li>
             <a href="#usingthecode">Using the code</a>
         </li>
+        <li>
+            <a href="#pointsofinterest">Points of interest</a>
+        </li>
     </ul>
 
-    <h2><a id="intro"></a>Introduction - The problem we are trying to solve?</h2>
-    <p>TODO why it's useful, the problem it solves etc. </p>
+    <h2><a id="intro"></a>Introduction</h2>
+    <p>In the field of pattern recognition, deep neural networks have gained prominence in the last 5 years. This can be largely attributed to availability of 
+        cheaper hardware, programming libraries and labelled data. Deep neural networks or Convolutional neural networks (CNN) if trained properly 
+        can give spectacular results. TensorFlow from Google is one the very popular libraries that implement some of these complicated algorithms</p>
+    <p>
+    In this article I am going to demonstrate how to train a CNN model to recognize handwritten digits from the MNIST database. This will be followed by a 
+    C# console application which will consume the trained model to actually classiy the test images from the MNIST dataset</p>
+    <h3>Tensorflow native library</h3>    
+    <pre>
+        ///
+        ///https://www.tensorflow.org/install/lang_c
+        ///The windows native implementation is downloadable as a single ZIP and structured as follows
+        ///
+        include
+        -------
+            |
+            |
+            |
+            --c_api.h
+            |
+        lib
+        ---
+            |
+            |
+            --tensorflow.dll
+            |
+            --tensorflow.lib
+
+
+    </pre>
+
+    <h3>Python and C#</h3>
+    <p>Tensorflow is implemented as C/C++ dynamic link library. Bindings in various languages are provided on top of this library.
+    Python is perhaps one of the most versatile programming layers built on top of the native TensorFlow implementations.
+    </p>
+    <pre>
+                        TensorFlow(C/C++)
+                        ----------------
+                            |
+                            |
+        ------------------------------------------------
+        |                                               |
+        |                                               |
+        |                                               |
+      Python                                        TensorFlowSharp(C#)
+      ------                                        -------------------
+  (train model)                             (use model in client application)
+    </pre>
     <p>Show block diagram of Web application</p>
     <p>TODO Train using Python , use .NET during production</p>
     <h2 id="back">Background</h2>
-    <p>
-        I have used Python for training a CNN model and then C# to build a client application. A basic knowlege of C#, NUGET and Python would be very helpful.        
-        I have used <strong>Visual Studio 2017</strong> for the simple Console application and <strong>Visual Studio Code for Python(1.36.1)</strong> training scripts.
-        In this article I have used the GPU version of the Tensorflow for to improve the speed of learning. You would need  a <strong>GPU</strong> enabled desktop.
+    <ul>
+        <li><strong>Python</strong> - I have used Python for training a CNN model using the MNIST dataset of handwritten digits. A basic knowlege of Python would be essential.
+            I have used <strong>Visual Studio Code (1.36.1)</strong> for Python. You can use any Python editor that suits you.
+        </li>
+        <li>
+            I have used <strong>Visual Studio 2017</strong> for the simple Console application which consumes the trained model and classifies the test images
+        </li>
+        <li>
+            In this article I have used the <strong>GPU</strong> version of the Tensorflow for to improve the speed of learning. You would need  a <strong>GPU</strong> enabled desktop.
         The reader is cautioned that coding with the GPU requires additional CUDA libraries and drivers to be installed. This article also assumes that the reader
         is familiar with the basic principles of <strong>Deep Convolution Neural Networks</strong>.
-    </p>
+        </li>
+    </ul>
+
     
 
     <h2><a id="mnist"></a> What is MNIST? Why MNIST?</h2>
     <p>TODO Show pic of MNIST</p>
+    <pre>
+        structure of MNIST, dimension
+    </pre>
     <p>TODO Talk about MNIST as a benchmark, </p>
+
+    <h2><a id="deeplearning"></a> Deep learning</h2>
+    <p>
+        TODO Show your pic from StackOverflow
+    </p>
 
     <h2><a id="tensorflow"></a> About TensorFlow</h2>
 
@@ -185,20 +252,15 @@ License:     Enter the license (<a href="http://www.codeproject.com/info/license
         methods and properties, any tricks or tips.
     </p>
 
-    <p>Blocks of code should be set as style &quot;Formatted&quot; like this: </p>
+   
 
-
-    <p>Remember to set the Language of your code snippet using the Language dropdown. </p>
-
-    <p>
-        Use the &quot;var&quot; button to wrap Variable or class names in &amp;lt;code&amp;gt;
-        tags like <code>this</code>.
-    </p>
-
-    <h2>Points of Interest</h2>
+    <h2 id="pointsofinterest">Points of Interest</h2>
 
     <p>
+        TODO Link to Andrew NG Youtube video
+
         Did you learn anything interesting/fun/annoying while writing the code? Did you do
+
         anything particularly clever or wild or zany?
     </p>
 

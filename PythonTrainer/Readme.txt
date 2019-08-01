@@ -72,6 +72,10 @@ C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\bin\
 		C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin
 	Status: CUDA driver version is insufficient for CUDA runtime version
 	Problem - Driver version was not uptodate
+    super(Session, self).__init__(target, graph, config=config)
+	  File "C:\Users\saurabhd\AppData\Local\Programs\Python\Python37\lib\site-packages\tensorflow\python\client\session.py", line 693, in __init__
+		self._session = tf_session.TF_NewSessionRef(self._graph._c_graph, opts)
+		tensorflow.python.framework.errors_impl.InternalError: cudaGetDevice() failed. Status: CUDA driver version is insufficient for CUDA runtime version
 
 	Step 6
 	-------
