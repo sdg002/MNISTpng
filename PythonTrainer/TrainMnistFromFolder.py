@@ -20,12 +20,14 @@ from keras.models import model_from_json
 from sklearn.metrics import log_loss
 import time
 from MnistImageLoader import load_images,ReShapeData
-
+from FreezeKerasToTF import freeze_session
+from keras import backend as K
+import tensorflow as tf
 
 #
 #The following variables should be set to the folder where MNIST images have been extracted 
 #
-cat_dog_train_path_50="C:\\Users\\saurabhd\\MyTrials\\MachineLearnings\\MNIST101\\mnist_png_50\\*\\*.png"
+##Remove this cat_dog_train_path_50="C:\\Users\\saurabhd\\MyTrials\\MachineLearnings\\MNIST101\\mnist_png_50\\*\\*.png"
 cat_dog_train_path_full="C:\\Users\\saurabhd\\MyTrials\\MachineLearnings\\MNIST101\\mnist_png\\training\\*\\*.png"
 cat_dog_test_path="C:\\Users\\saurabhd\\MyTrials\\MachineLearnings\\MNIST101\\mnist_png\\testing\\*\\*.png"
 nb_classes = 10 #we have these many digits in our training
@@ -103,12 +105,13 @@ print("Compilation complete");
 print("Train begin");
 # Train the model 
 
+total_epochs=3; #20
 start = time.time()
 model.fit(
     train_data1, 
     train_target1, 
     batch_size = 128, 
-    epochs = 20,
+    epochs = total_epochs,
 	  verbose = 1)
 print("Train complete");
 #
@@ -135,5 +138,16 @@ print("Model written to file:" + filenameModel);
 # serialize weights to HDF5
 filenameWeights="TrainedMnistModelWts.h5"
 model.save_weights(filenameWeights)
-print("Weights were saved to file:" + filenameWeights)
+print("Weights were saved to file:" + filenameWeights);
+#
+#Saving as a single file (model+weights)
+#
+model.save("SingleFile.h5") #this saves but the PB file does not work using C#
 
+#
+#Saving using Freeze approach https://stackoverflow.com/questions/45466020/how-to-export-keras-h5-to-tensorflow-pb
+#
+
+frozen_graph = freeze_session(K.get_session(),
+                              output_names=[out.op.name for out in model.outputs])
+tf.train.write_graph(frozen_graph, "some_directory", "my_model.pb", as_text=False)
