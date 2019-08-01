@@ -33,11 +33,9 @@ CODE { COLOR: #990000; FONT-FAMILY: "Courier New", Courier, mono; }
       href="https://codeproject.global.ssl.fastly.net/App_Themes/CodeProject/Css/Main.min.css">
 </head>
 <body bgcolor="#FFFFFF" color=#000000>
-<!--------------------------------------------------------------------------->  
-
-
-<!-------------------------------     STEP 1      --------------------------->
-<!--  Fill in the details (CodeProject will reformat this section for you) -->
+    <!--------------------------------------------------------------------------->
+    <!-------------------------------     STEP 1      --------------------------->
+    <!--  Fill in the details (CodeProject will reformat this section for you) -->
 
 <pre>
 Title:       Enter Article Title Here
@@ -53,36 +51,81 @@ SubSection   Enter the Code Project SubSection you Wish the Article to Appear
 License:     Enter the license (<a href="http://www.codeproject.com/info/licenses.aspx">CPOL, CPL, MIT, etc</a>)
 </pre>
 
-<!-------------------------------     STEP 2      --------------------------->
-<!--  Include download and sample image information.                       --> 
+    <!-------------------------------     STEP 2      --------------------------->
+    <!--  Include download and sample image information.                       -->
 
-<ul class=download>
-<li><a href="Article_demo.zip">Download demo project - XXX Kb </a></li>
-<li><a href="Article_src.zip">Download source - XXX Kb</a></li>
-</ul>
+    <ul class=download>
+        <li><a href="Article_demo.zip">Download demo project - XXX Kb </a></li>
+        <li><a href="Article_src.zip">Download source - XXX Kb</a></li>
+    </ul>
 
-<p><img src="Article.gif" alt="Sample Image - maximum width is 600 pixels" 
-        style="width:400px; height:200px"></p>
+    <p>
+        <img src="Article.gif" alt="Sample Image - maximum width is 600 pixels"
+             style="width:400px; height:200px">
+    </p>
 
-<!-------------------------------     STEP 3      --------------------------->
+    <!-------------------------------     STEP 3      --------------------------->
+    <!--  Add the article text. Please use simple formatting (<h2>, <p> etc)   -->
 
-<!--  Add the article text. Please use simple formatting (<h2>, <p> etc)   -->
+    <h2>Table of Contents</h2>
+    <ul>
+        <li>
+            <a href="#intro">Introduction</a>
+        </li>
+        <li>
+            <a href="#mnist">What is MNIST?</a>
+        </li>
+        <li>
+            <a href="#tensorflow">About Tensorflow</a>
+        </li>
+        <li>
+            <a href="#tensorflowsharp">About TensorflowSharp</a>
+        </li>
+    </ul>
 
-<h2>Introduction</h2>
+    <h2><a id="intro"></a>Introduction - The problem we are trying to solve?</h2>
+    <p>TODO why it's useful, the problem it solves etc. </p>
+    <p>Show block diagram of Web application</p>
 
-<p>What the article/code snippet does, why it's useful, the problem it solves etc. </p>
+    <h2><a id="mnist"></a> What is MNIST? Why MNIST?</h2>
+    <p>TODO Show pic of MNIST</p>
+    <p>TODO Talk about MNIST as a benchmark, </p>
 
-<h2>Background</h2>
+    <h2><a id="tensorflow"></a> About TensorFlow</h2>
 
-<p>(Optional) Is there any background to this article that may be useful such 
-as an introduction to the basic ideas presented? </p>
+    <p>
+        (Optional) Is there any background to this article that may be useful such
+        as an introduction to the basic ideas presented?
+    </p>
 
-<h2>Using the code</h2>
 
-<p>A brief description of how to use the article or code. The class names, the 
-methods and properties, any tricks or tips. </p>
+    <h2><a id="tensorflowsharp"></a>TensorflowSharp - Using Tensorflow from a C# application</h2>
+    <p>TODO Talk about Tensorflow</p>
 
-<p>Blocks of code should be set as style &quot;Formatted&quot; like this: </p>
+
+    <h2>Using Tensorflow with GPU</h2>
+    <p>
+        TODO Talk about all the steps neccessary for using GPU
+    </p>
+
+    <h2><a id="trainingusingpython"></a> Training a CNN model using TensorFlow and Python</h2>
+    <p>
+        TODO Show python script
+    </p>
+
+
+    <hr />
+
+
+
+    <h2>Using the code</h2>
+
+    <p>
+        A brief description of how to use the article or code. The class names, the
+        methods and properties, any tricks or tips.
+    </p>
+
+    <p>Blocks of code should be set as style &quot;Formatted&quot; like this: </p>
 
 <pre>//
 // Any source code blocks look like this
@@ -90,21 +133,25 @@ methods and properties, any tricks or tips. </p>
 var i = 0;
 ...</pre>
 
-<p>Remember to set the Language of your code snippet using the Language dropdown. </p>
+    <p>Remember to set the Language of your code snippet using the Language dropdown. </p>
 
-<p>Use the &quot;var&quot; button to wrap Variable or class names in &amp;lt;code&amp;gt; 
-tags like <code>this</code>. </p>
+    <p>
+        Use the &quot;var&quot; button to wrap Variable or class names in &amp;lt;code&amp;gt;
+        tags like <code>this</code>.
+    </p>
 
-<h2>Points of Interest</h2>
+    <h2>Points of Interest</h2>
 
-<p>Did you learn anything interesting/fun/annoying while writing the code? Did you do 
-anything particularly clever or wild or zany? </p>
+    <p>
+        Did you learn anything interesting/fun/annoying while writing the code? Did you do
+        anything particularly clever or wild or zany?
+    </p>
 
-<h2>History</h2>
+    <h2>History</h2>
 
-<p>Keep a running update of any changes or improvements you've made here. </p>
+    <p>Keep a running update of any changes or improvements you've made here. </p>
 
-<!-------------------------------    That's it!   --------------------------->
+    <!-------------------------------    That's it!   --------------------------->
 </body>
 
 </html>
