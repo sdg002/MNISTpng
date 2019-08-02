@@ -52,6 +52,39 @@ SubSection   Enter the Code Project SubSection you Wish the Article to Appear
 License:     Enter the license (<a href="http://www.codeproject.com/info/licenses.aspx">CPOL, CPL, MIT, etc</a>)
 </pre>
 
+<style>
+table.mnist  {
+  border: 1px solid blue;
+  border-collapse: collapse;
+}
+table.mnist th
+{
+  border: 2px solid blue;
+  border-collapse: collapse;
+
+}
+table.mnist tr
+{
+  border: 1px solid blue;
+  border-collapse: collapse;
+}
+table.mnist td
+{
+  border: 1px solid blue;
+  border-collapse: collapse;
+  padding-left:5px;
+  padding-right:5px
+}
+table.mnist td.header
+{
+  font-weight:bold;
+}
+table.mnist thead td
+{
+    font-weight:bold;
+}
+</style>
+
     <!-------------------------------     STEP 2      --------------------------->
     <!--  Include download and sample image information.                       -->
 
@@ -114,7 +147,9 @@ License:     Enter the license (<a href="http://www.codeproject.com/info/license
         can give spectacular results. TensorFlow from Google is one the very popular libraries that implement some of these complicated algorithms</p>
     <p>
     In this article I am going to demonstrate how to train a CNN model to recognize handwritten digits from the MNIST database. This will be followed by a 
-    C# console application which will consume the trained model to actually classiy the test images from the MNIST dataset</p>
+    C# console application which will consume the trained model to actually classiy the test images from the MNIST dataset. The objective of this article
+        is to demonstrate how to make the best use of Python for training a model and .NET to build a hypothetical end user application which consumes the trained model.
+    </p>
     <h3>Tensorflow native library</h3>    
     <pre>
         ///
@@ -179,7 +214,8 @@ License:     Enter the license (<a href="http://www.codeproject.com/info/license
     <h2><a id="mnist"></a> What is MNIST? Why MNIST?</h2>
     <h3>Overview</h3>
     <p>MNIST database is a collection of handwritten digits (0-9). This comprises of 60,000 training and 10,000 testing images. Each of the images 
-        is 28 pixels wide and 28 pixels high. The images are in gray scale.
+        is 28 pixels wide and 28 pixels high and all the images are in gray scale. In the world of machine learning and computer vision, MNIST has become the de facto
+        standard to test any new paradigm. (Reference http://yann.lecun.com/exdb/mnist/)
         <img src="images/3_expanded.PNG" style="width:50%;height:50%;"/>
     </p>
     <h3>Example pictures</h3>
@@ -196,29 +232,52 @@ License:     Enter the license (<a href="http://www.codeproject.com/info/license
         <img src="images/9.png"/>
     </p>
     <h3>Distribution of pictures</h3>
-    <table style="border-width:1px;border-color:black;border-style:solid;background-color:orange;">
+    <table class="mnist">
         <thead>
             <tr>
                 <td></td>
                 <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
             </tr>
         </thead>
-        <tbody style="border:1px solid red">
-            <tr style="border:1px solid red">
-                <td style="border:1px solid red">Training</td>
-                <td>001</td>
+        <tbody>
+            <tr>
+                <td class="header">Training</td>
+                <td>5923</td>
+                <td>6742</td>
+                <td>5985</td>
+                <td>6131</td>
+                <td>5842</td>
+                <td>5421</td>
+                <td>5918</td>
+                <td>6265</td>
+                <td>5851</td>
+                <td>5949</td>
             </tr>
             <tr>
-                <td>Testing</td>
-                <td>002</td>
+                <td class="header">Testing</td>
+                <td>980</td>
+                <td>1135</td>
+                <td>1032</td>
+                <td>1010</td>
+                <td>982</td>
+                <td>892</td>
+                <td>958</td>
+                <td>1028</td>
+                <td>974</td>
+                <td>1009</td>
+
             </tr>
         </tbody>
     </table>
-    <p>TODO Show pic of MNIST</p>
-    <pre>
-        structure of MNIST, dimension
-    </pre>
-    <p>TODO Talk about MNIST as a benchmark, </p>
 
     <h2><a id="deeplearning"></a> Deep learning</h2>
     <p>
