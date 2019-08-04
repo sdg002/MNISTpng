@@ -346,7 +346,7 @@ table.mnist thead td
             Update the version of the NVIDIA drivers. I did not install the through NVIDIA web site. I updated the display adapter through the Windows Device Manager user interface.
             The version 24.21.14.1131  worked for me.
 
-            <img src="images/DeviceManagerDisplayAdapter.png"/>
+            <img src="images/DeviceManagerDisplayAdapter.png" style="border:1px solid gray"/>
         </li>
         <li>
             Install CUDA Toolkit 10.0 version
@@ -366,6 +366,53 @@ table.mnist thead td
     <a href="#toc" title="Back to Table of Contents">Top</a>
 
     <h2><a id="trainingusingpython"></a> Training a CNN model using TensorFlow and Python</h2>
+    <h3>CNN architecture</h3>
+    <pre>
+                                
+                                 Input layer (28X28,1 channel)
+                                 -----------------------------
+                                            |
+                                            |
+                                            |           
+                                 Convolution layer (5X5,20,RELU)
+                                --------------------------------
+                                            |
+                                            |
+                                            |           
+                                Max Pool layer (2X2,stride=2)
+                               ------------------------------
+                                            |                              
+                                            |                              
+                                            |     
+                                Convolution layer (5X5,50,RELU)
+                               --------------------------------
+                                            |                              
+                                            |                              
+                                            |                              
+                                Max Pool layer (2X2,stride=2)
+                                -----------------------------
+                                            |                              
+                                            |                              
+                                            |     
+                                         Flatten
+                                        ---------
+                                            |                              
+                                            |                              
+                                            |     
+                                Dense layer (500 nodes,RELU)
+                                ----------------------------
+                                            |                              
+                                            |                              
+                                            |     
+                                Dense layer (10 nodes,RELU)
+                                ----------------------------
+                                            |                              
+                                            |                              
+                                            |     
+                                Output layer(Softmax)
+                                ----------------------
+    </pre>
+    <h3>Loading training image files</h3>
     <p>
         TODO Show python script
     </p>
