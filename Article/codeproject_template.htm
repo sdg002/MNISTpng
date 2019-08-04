@@ -131,6 +131,8 @@ table.mnist thead td
                 <li><a href="#csharpconsole_create">Create a console application</a></li>
                 <li><a href="#csharpconsole_loadmodel">Load the trained model file</a></li>
                 <li><a href="#csharpconsole_evaluateimage">Load the test image and evaluate using TensorflowSharp</a></li>
+                <li><a href="#csharpconsole_evaluateimage">Results</a></li>
+                
             </ul>
         </li>
         <li>
@@ -301,9 +303,64 @@ table.mnist thead td
 
 
     <h2 id="tensorflowgpu">Using Tensorflow with GPU</h2>
+    <h3>Overview</h3>
+    <pre>
+                                Python script
+                                --------------
+                                        |
+                                        |
+                                        |
+
+                              TensorFlow GPU package
+                              ----------------------
+                                        |
+                                        |
+                                        |
+                                      cuDNN
+                                      -----
+                                        |
+                                        |
+                                        |
+                                  CUDA Toolkit
+                                  --------------
+                                        |
+                                        |
+                                        |
+                                     Drivers
+                                     -------
+                                        |
+                                        |
+                                        |
+                                       GPU
+                                       ---
+                                
+    </pre>
+    <h3>What worked for me?</h3>
     <p>
-        TODO Talk about all the steps neccessary for using GPU
+        When using TensorFlow for training, you have the choice of using CPU and GPU. You will need the correct version of NVIDIA drivers
+        and libraries. As a rule of thumb,the version of NVIDIA drivers should match the current version of TensorFlow. At the time of writing this article, I have used the python package TensorFlow-GPU 1.14.0.
+        I would caution the reader that my experience with installing the drivers and getting TensorFlow GPU to work was less than smooth.
     </p>
+    <ul>
+        <li>
+            Update the version of the NVIDIA drivers. I did not install the through NVIDIA web site. I updated the display adapter through the Windows Device Manager user interface.
+            The version 24.21.14.1131  worked for me.
+        </li>
+        <li>
+            Install CUDA Toolkit 10.0 version
+        <li>
+            Install cuDNN SDK version 7.6.2 . I chose the Windows 10 edition. I copied over cudnn64_7.dll to %ProgramFiles%\NVIDIA GPU Computing Toolkit\CUDA\v10.0\bin
+        </li>
+        <li>
+            Python package Tensorflow 1.14
+        </li>
+        <li>
+            Python package Keras 2.2.4
+        </li>
+        <li>
+            Python package Numpy 1.16.1
+        </li>
+    </ul>
     <a href="#toc" title="Back to Table of Contents">Top</a>
 
     <h2><a id="trainingusingpython"></a> Training a CNN model using TensorFlow and Python</h2>
@@ -348,6 +405,13 @@ table.mnist thead td
     <pre>
         TODO Show code snippet
     </pre>
+    <a href="#toc" title="Back to Table of Contents">Top</a>
+    
+    <h3 id="csharpconsole_results">Results</h3>
+    <p>Display test vs epoch
+        Display some pictures which failed
+        Possibly confusion matrix
+    </p>
     <a href="#toc" title="Back to Table of Contents">Top</a>
 
     <h2 id="usingthecode">Using the code</h2>
