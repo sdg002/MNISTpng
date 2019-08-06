@@ -117,6 +117,13 @@ table.mnist thead td
         </li>
         <li>
             <a href="#deeplearning">Deep learning</a>
+            <ul>
+                <li><a href="#deeplearning_perceptrons">Perceptrons</a></li>
+                <li><a href="#deeplearning_singleperceptrons">Single perceptron</a></li>
+                <li><a href="#deeplearning_multi_perceptrons">Multi layer perceptrons</a></li>
+                <li><a href="#deeplearning_cnn">Convolutional Neural Networks</a></li>
+
+            </ul>
         </li>
         <li>
             <a href="#tensorflowsharp">About TensorflowSharp</a>
@@ -298,12 +305,42 @@ table.mnist thead td
     </table>
     <a href="#toc" title="Back to Table of Contents">Top</a>
     <h2><a id="deeplearning"></a> Deep learning</h2>
+    <h3 id="deeplearning_perceptrons">Perceptrons</h3>
     <p>
-        TODO Show your pic from StackOverflow
+    In the 1940s and 50s the idea of a very basic mathematical neuron began to take shape. Researchers (McCulloch, Pitts and Rosenblatt) drew inspiration from the working of a biological neuron. Neurons are the building blocks of the nervous system. An average human brain has several billions of neurons indirectly connected to each other through synapses.
+    They envisioned an individual neuron to behave like a straight-line classifier. The electric signals flowing in through the 
+    dendrites represented a real-life signal (vector) and the output signal would represent a binary (on/off) state of classification. Frank Rosenblatt (1962) took the design of McCulloch and Pitts neuron a step forward by proposing the design of the linear perceptron in his book Principles of Neurodynamics (published 1962, Section “Completely linear perceptrons”). 
     </p>
+    <img src="images/BioNeuron.PNG"/><br />
+    <a href="#toc" title="Back to Table of Contents">Top</a>
+    <h3 id="deeplearning_singleperceptrons">Single perceptron</h3>
+    <img src="images/NeuronSingleNode.PNG"/>
+    <p>The circle represents the equation of a straight line in the form of a.x+b.y+c=0. </p>
+    <img src="images/Neuron_LinearClassifier.PNG" />
+    <p>Given two classes of points X and O, which are linearly separable, you can find a straight line which divides the 2 classes. 
+        If you feed in the coordinates of the points in class X to the equation a.x+b.y+c and then do the same for all points in class O
+        then you are going to see that all points in class X produce a positive value , while all points in class O produce a negative value. 
+        The change of sign could be other way round , depending on the constants a,b and c. Nevertheless, this is the overarching principle of a Perceptron.
+    </p>
+    <a href="#toc" title="Back to Table of Contents">Top</a>
+    <h3 id="deeplearning_multi_perceptrons">Multi layer perceptrons</h3>
+    <img src="images/Neuron_XOR.PNG"/>
     <p>
-        TODO Show CNN network
+    If we are unable to find a single line that separates the classes X and O , as in the case of the famous XOR problem, then we could 
+    cascade multiple linear classifiers.
     </p>
+    <img src="images/XOR_TruthTable.PNG"/>
+    <br />
+    <img src="images/MultiLayerPerceptron.PNG"/><br/>
+    <a href="#toc" title="Back to Table of Contents">Top</a>
+    <h3 id="deeplearning_cnn">Convolutional Neural Networks</h3>
+    <p>
+        Deep learning takes neural networks forward by combining feature extraction and hyperplane discovery.
+        The features are extracted by layers of filters. For a thorough treatise on this subject, the reader is requested to follow 
+        Andrew Ng's tutorials.
+    </p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/ArPaAX_PhIs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <br/>
     <a href="#toc" title="Back to Table of Contents">Top</a>
     
 
