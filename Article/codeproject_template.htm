@@ -131,6 +131,14 @@ table.mnist thead td
         <li>
             <a href="#tensorflowgpu">Using Tensorflow with GPU</a>
             <ul>
+                <li><a href="#tensorflowgpu_overview">Overview</a></li>
+                <li><a href="#tensorflowgpu_whatworkedforme">GPU/NVDIA-What worked for me?</a></li>
+            </ul>
+        </li>
+        <li>
+            
+            <a href="#tensorflowgpu">Training a CNN model using TensorFlow and Python</a>            
+            <ul>
                 <li><a href="#trainingusingpython_cnnarchitecture">CNN Archictecture</a></li>
                 <li><a href="#trainingusingpython_loadimages">Training image files</a></li>
                 <li><a href="#trainingusingpython_loadimagespython1">1-Python script (MnistImageLoader.py)</a></li>
@@ -356,7 +364,7 @@ table.mnist thead td
 
 
     <h2 id="tensorflowgpu">Using Tensorflow with GPU</h2>
-    <h3>Overview</h3>
+    <h3 id="tensorflowgpu_overview">Overview</h3>
     <pre>
                                 Python script
                                 --------------
@@ -388,10 +396,10 @@ table.mnist thead td
                                        ---
                                 
     </pre>
-    <h3>What worked for me?</h3>
+    <h3 id="tensorflowgpu_whatworkedforme">GPU/NVDIA-What worked for me?</h3>
     <p>
-        When using TensorFlow for training, you have the choice of using CPU and GPU. You will need the correct version of NVIDIA drivers
-        and libraries. As a rule of thumb,the version of NVIDIA drivers should match the current version of TensorFlow. At the time of writing this article, I have used the python package TensorFlow-GPU 1.14.0.
+        When using TensorFlow for training, you have the choice of using either the CPU package or the GPU package. The GPU is preferred because the training speed is significantly faster.  
+        You will need the correct version of NVIDIA drivers and CUDA libraries. As a rule of thumb,the version of NVIDIA drivers should match the current version of TensorFlow. At the time of writing this article, I have used the python package TensorFlow-GPU 1.14.0.
         I would caution the reader that my experience with installing the drivers and getting TensorFlow GPU to work was less than smooth.
     </p>
     <ul>
