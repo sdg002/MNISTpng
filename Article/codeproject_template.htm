@@ -132,9 +132,13 @@ table.mnist thead td
             <a href="#tensorflowgpu">Using Tensorflow with GPU</a>
             <ul>
                 <li><a href="#trainingusingpython_cnnarchitecture">CNN Archictecture</a></li>
-                <li><a href="#trainingusingpython_loadimages">Loading training image files</a></li>
-                <li><a href="#trainingusingpython_createmodel">Create CNN model</a></li>
-                <li><a href="#trainingusingpython_trainmodel">Train the model and save model to file</a></li>
+                <li><a href="#trainingusingpython_loadimages">Training image files</a></li>
+                <li><a href="#trainingusingpython_loadimagespython1">1-Python script (MnistImageLoader.py)</a></li>
+                <li><a href="#trainingusingpython_loadimagespython2">2-Loading the training images (TrainMnistFromFolder.py)</a></li>
+                
+                <li><a href="#trainingusingpython_createmodel">3-Create the CNN model(TrainMnistFromFolder.py)</a></li>
+                <li><a href="#trainingusingpython_trainmodel">4-Train the model(TrainMnistFromFolder.py)</a></li>
+                <li><a href="#trainingusingpython_savemodel">5-Save the model to file(TrainMnistFromFolder.py)</a></li>
             </ul>
         </li>
         <li>
@@ -335,7 +339,7 @@ table.mnist thead td
     <a href="#toc" title="Back to Table of Contents">Top</a>
     <h3 id="deeplearning_cnn">Convolutional Neural Networks</h3>
     <p>
-        Deep learning takes neural networks forward by combining feature extraction and hyperplane discovery.
+        Deep learning takes a multi layer perceptron a step forward by combining feature extraction and hyperplane discovery.
         The features are extracted by layers of filters. For a thorough treatise on this subject, the reader is requested to follow 
         Andrew Ng's tutorials.
     </p>
@@ -462,7 +466,7 @@ table.mnist thead td
                                 ----------------------
     </pre>
     <a href="#toc" title="Back to Table of Contents">Top</a>
-    <h3 id="trainingusingpython_loadimages">Step 1 - Loading training image files</h3>
+    <h3 id="trainingusingpython_loadimages">Training image files</h3>
     <p>
         MNIST dataset can be readily accessed from the <a href="https://scikit-learn.org/stable/auto_examples/classification/plot_digits_classification.html">scikit-learn</a> package.
         However in this tutorial I have demonstrated how to load the images from disk. The individual PNG files are made available in the accompanying project MNISpng.csproj.        
@@ -500,38 +504,160 @@ table.mnist thead td
                      |--(folders 0 to 9)
     </pre>
     <a href="#toc" title="Back to Table of Contents">Top</a>
-    <h3 id="trainingusingpython_loadimagesoython">Step 1 - Python script (MnistImageLoader.py)</h3>
+    <h3 id="trainingusingpython_loadimagespython1">1-Python script (MnistImageLoader.py)</h3>
     <pre>
-    #
-    #Load images and labels. Returns a tuple of image data,label
-    #
-    def load_images(path_in):
-            filenames = glob.glob(path_in)
-            images=[] 
-            labels=[] #labels for each training file
-            filenames = glob.glob(path_in)
-            for filename in filenames:
-                    #get the parent folder from the full path of the file /mnist/blah/training/3/34348.png
-                    fulldir=os.path.dirname(filename)
-                    parentfolder=os.path.basename(fulldir)
-                    imagelabel=int(parentfolder)
-                    labels.append(imagelabel)
-                    img = get_im(filename)
-                    images.append(img)
-            return images,labels
+        #
+        #Load images and labels. Returns a tuple of image data,label
+        #
+        def load_images(path_in):
+                filenames = glob.glob(path_in)
+                images=[] 
+                labels=[] #labels for each training file
+                filenames = glob.glob(path_in)
+                for filename in filenames:
+                        #get the parent folder from the full path of the file /mnist/blah/training/3/34348.png
+                        fulldir=os.path.dirname(filename)
+                        parentfolder=os.path.basename(fulldir)
+                        imagelabel=int(parentfolder)
+                        labels.append(imagelabel)
+                        img = get_im(filename)
+                        images.append(img)
+                return images,labels
+
+        #
+        #The output from load_images() is further refined
+        #
+        def ReShapeData(data,target,numclasses):
+                data_out = np.array(data, dtype=np.uint8)
+                target_out = np.array(target, dtype=np.uint8)
+                data_out = data_out.reshape(data_out.shape[0],  28,28)
+                data_out = data_out[:, :, :, np.newaxis]
+                data_out = data_out.astype('float32')
+                data_out /= 255
+                target_out = np_utils.to_categorical(target_out, numclasses)
+                return data_out,target_out
 
     </pre>
     <a href="#toc" title="Back to Table of Contents">Top</a>
-    <h3 id="trainingusingpython_createmodel">Step 2 - Create CNN model</h3>
-    <p>
-        TODO Show python script
-    </p>
+    <h3 id="trainingusingpython_loadimagespython2">2-Loading the training images (TrainMnistFromFolder.py)</h3>
+    <p>The master python script TrainMnistFromFolder.py will call the functions <strong>load_images</strong> and <strong>ReShapeData</strong>.</p>
+    <pre>
+        #
+        #Load training images
+        #
+        from MnistImageLoader import load_images,ReShapeData
+
+        print("Loading training images")
+        (train_data, train_target)=load_images(mnist_train_path_full)
+        (train_data1,train_target1)=ReShapeData(train_data,train_target,nb_classes)
+        print('Shape:', train_data1.shape)
+        print(train_data1.shape[0], ' train images were loaded')
+
+    </pre>
+    <a href="#toc" title="Back to Table of Contents">Top</a>
+    <h3 id="trainingusingpython_createmodel">3-Create the CNN model(TrainMnistFromFolder.py)</h3>
+    <pre>
+        # 
+        # Create a sequential model
+        #
+        model = Sequential()
+        # Add the first convolution layer
+        model.add(Convolution2D(
+            name="conv1",
+            filters = 20,
+            kernel_size = (5, 5),
+            padding = "same",
+            input_shape = (28, 28, 1)))
+        # Add a ReLU activation function
+        model.add(Activation(
+            activation = "relu"))
+        # Add a pooling layer
+        model.add(MaxPooling2D(
+            name="maxpool1",
+            pool_size = (2, 2),
+            strides =  (2, 2)))
+        # Add the second convolution layer
+        model.add(Convolution2D(
+            name="conv2",
+            filters = 50,
+            kernel_size = (5, 5),
+            padding = "same"))
+        # Add a ReLU activation function
+        model.add(Activation(
+            activation = "relu"))
+        # Add a second pooling layer
+        model.add(MaxPooling2D(
+            name="maxpool2",
+            pool_size = (2, 2),
+            strides = (2, 2)))
+        # Flatten the network
+        model.add(Flatten())
+        # Add a fully-connected hidden layer
+        model.add(Dense(500))
+        # Add a ReLU activation function
+        model.add(Activation(activation = "relu"))
+        # Add a fully-connected output layer - the output layer nodes should match the count of image classes
+        model.add(Dense(nb_classes,name="outputlayer")) 
+        # Add a softmax activation function
+        model.add(Activation("softmax"))
+        #
+        #Display Summary
+        #
+        model.summary()
+
+        # Compile the network
+        model.compile(
+            loss = "categorical_crossentropy", 
+            optimizer = SGD(lr = 0.01),
+            metrics = ["accuracy"])
+        print("Compilation complete");
+
+    </pre>
     <a href="#toc" title="Back to Table of Contents">Top</a>
 
-    <h3 id="trainingusingpython_trainmodel">Step 3 - Train model and save the model </h3>
-    <p>
-        TODO Show python script
-    </p>
+    <h3 id="trainingusingpython_trainmodel">4-Train model(TrainMnistFromFolder.py)</h3>
+    <pre>
+        #
+        # Train the model 
+        #
+        total_epochs=20
+        start = time.time()
+        model.fit(
+            train_data1, 
+            train_target1, 
+            batch_size = 128, 
+            epochs = total_epochs,
+	          verbose = 1)
+        print("Train complete");
+        #
+        #Test the model
+        #
+        print("Testing on test data")
+        (loss, accuracy) = model.evaluate(
+            test_data1, 
+            test_target1,
+            batch_size = 128, 
+            verbose = 1)
+
+        # Print the model's accuracy
+        print("Accuracy="+ str(accuracy))
+
+    </pre>
+    <a href="#toc" title="Back to Table of Contents">Top</a>
+    <h3 id="trainingusingpython_savemodel">5-Save the model (FreezeKerasToTF.py)</h3>
+    <p>After training is complete, the model has to be saved in the original TensorFlow format (.pb). 
+        The function freeze_session in the file FreezeKerasToTF.py does this for us. The saved model contains the network layout and the weights</p>
+    <pre>
+
+        #
+        #Saving using Freeze approach https://stackoverflow.com/questions/45466020/how-to-export-keras-h5-to-tensorflow-pb
+        #
+
+        frozen_graph = freeze_session(K.get_session(),
+                                      output_names=[out.op.name for out in model.outputs])
+        tf.train.write_graph(frozen_graph, "Out", "Mnist_model.pb", as_text=False)
+        
+    </pre>
     <a href="#toc" title="Back to Table of Contents">Top</a>
 
 
