@@ -123,6 +123,12 @@ table.mnist thead td
         </li>
         <li>
             <a href="#tensorflowgpu">Using Tensorflow with GPU</a>
+            <ul>
+                <li><a href="#trainingusingpython_cnnarchitecture">CNN Archictecture</a></li>
+                <li><a href="#trainingusingpython_loadimages">Loading training image files</a></li>
+                <li><a href="#trainingusingpython_createmodel">Create CNN model</a></li>
+                <li><a href="#trainingusingpython_trainmodel">Train the model and save model to file</a></li>
+            </ul>
         </li>
         <li>
             <a href="#csharpconsole">Using Tensorflow in a C# console application</a>
@@ -137,6 +143,12 @@ table.mnist thead td
         </li>
         <li>
             <a href="#usingthecode">Using the code</a>
+            <ul>
+                <li><a href="#usingthecode_github">Github</a></li>
+                <li><a href="#usingthecode_structure">Solution structure</a></li>
+                <li><a href="#usingthecode_pythontrainer">Python Trainer</a></li>
+                <li><a href="#usingthecode_consoleapptester">ConsoleAppTester</a></li>
+            </ul>
         </li>
         <li>
             <a href="#pointsofinterest">Points of interest</a>
@@ -366,7 +378,7 @@ table.mnist thead td
     <a href="#toc" title="Back to Table of Contents">Top</a>
 
     <h2><a id="trainingusingpython"></a> Training a CNN model using TensorFlow and Python</h2>
-    <h3>CNN architecture</h3>
+    <h3 id="trainingusingpython_cnnarchitecture">CNN architecture</h3>
     <pre>
                                 
                                  Input layer (28X28,1 channel)
@@ -412,11 +424,79 @@ table.mnist thead td
                                 Output layer(Softmax)
                                 ----------------------
     </pre>
-    <h3>Loading training image files</h3>
+    <a href="#toc" title="Back to Table of Contents">Top</a>
+    <h3 id="trainingusingpython_loadimages">Step 1 - Loading training image files</h3>
+    <p>
+        MNIST dataset can be readily accessed from the <a href="https://scikit-learn.org/stable/auto_examples/classification/plot_digits_classification.html">scikit-learn</a> package.
+        However in this tutorial I have demonstrated how to load the images from disk. The individual PNG files are made available in the accompanying project MNISpng.csproj.        
+        The python script MnistImageLoader.py will enumerated over the the directory structured and build a list of training/testing images. The parent folder of each PNG file will provide the 
+        training label (0-9). 
+    </p>
+    <pre>
+        MNIST
+        -----
+                |
+                |
+                training.zip
+                -----------
+                |    |
+                |    |
+                |    |--(folders 0 to 9)
+                |           |
+                |           |
+                |           |_0
+                |           |
+                |           |
+                |           |_1
+                |           |
+                |           |
+                |           |_2
+                |           .
+                |           .
+                |           ._9
+                |
+                |
+                testing.zip
+                -----------
+                     |
+                     |
+                     |--(folders 0 to 9)
+    </pre>
+    <a href="#toc" title="Back to Table of Contents">Top</a>
+    <h3 id="trainingusingpython_loadimagesoython">Step 1 - Python script (MnistImageLoader.py)</h3>
+    <pre>
+    #
+    #Load images and labels. Returns a tuple of image data,label
+    #
+    def load_images(path_in):
+            filenames = glob.glob(path_in)
+            images=[] 
+            labels=[] #labels for each training file
+            filenames = glob.glob(path_in)
+            for filename in filenames:
+                    #get the parent folder from the full path of the file /mnist/blah/training/3/34348.png
+                    fulldir=os.path.dirname(filename)
+                    parentfolder=os.path.basename(fulldir)
+                    imagelabel=int(parentfolder)
+                    labels.append(imagelabel)
+                    img = get_im(filename)
+                    images.append(img)
+            return images,labels
+
+    </pre>
+    <a href="#toc" title="Back to Table of Contents">Top</a>
+    <h3 id="trainingusingpython_createmodel">Step 2 - Create CNN model</h3>
     <p>
         TODO Show python script
     </p>
     <a href="#toc" title="Back to Table of Contents">Top</a>
+
+    <h3 id="trainingusingpython_trainmodel">Step 3 - Train model and save the model </h3>
+    <p>
+        TODO Show python script
+    </p>
+    <a href="#toc" title="Back to Table of Contents">Top</a>
+
 
     <h2 id="csharpconsole">C# console application</h2>
     <h3 id="csharpconsole_overview">Overview</h3>
@@ -464,11 +544,39 @@ table.mnist thead td
     <a href="#toc" title="Back to Table of Contents">Top</a>
 
     <h2 id="usingthecode">Using the code</h2>
+    <h3 id="usingthecode_github">Github Repository</h3>
+    <a href="https://github.com/sdg002/MNISTpng">https://github.com/sdg002/MNISTpng</a>
+    <h3 id="usingthecode_structure">Solution stucture</h3>
+    <pre>
+        Solution
+        --------
+                |
+                |
+                MNISTPng
+                --------
+                |
+                |
+                PythonTrainer
+                -------------
+                |
+                |
+                ConsoleAppTester
+                ----------------
 
+    </pre>
+
+    <h3 id="usingthecode_pythontrainer">PythonTrainer</h3>
     <p>
+        TODO Github
+
         A brief description of how to use the article or code. The class names, the
         methods and properties, any tricks or tips.
     </p>
+    <p>Python scripts for training a CNN model</p>
+    <h3 id="usingthecode_mnistpng">MNISTPng</h3>
+    <p>to be done</p>
+    <h3 id="usingthecode_consoleapptester">ConsoleAppTester</h3>
+    <p>C# EXE which will use TensorFlowSharp to load the trained model</p>
     <a href="#toc" title="Back to Table of Contents">Top</a>
    
 

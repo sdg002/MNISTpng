@@ -44,6 +44,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="FreezeKerasToTF.py" />
     <Content Include="keras_to_tensorflow.py" />
     <Content Include="MnistImageLoader.py" />
     <Content Include="Readme.txt" />
