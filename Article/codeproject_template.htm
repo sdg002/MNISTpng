@@ -140,23 +140,29 @@ table.mnist thead td
             <a href="#tensorflowgpu">Training a CNN model using TensorFlow and Python</a>            
             <ul>
                 <li><a href="#trainingusingpython_cnnarchitecture">CNN Archictecture</a></li>
-                <li><a href="#trainingusingpython_loadimages">Training image files</a></li>
+                <li><a href="#trainingusingpython_loadimages">Image files used for training</a></li>
                 <li><a href="#trainingusingpython_loadimagespython1">1-Python script (MnistImageLoader.py)</a></li>
                 <li><a href="#trainingusingpython_loadimagespython2">2-Loading the training images (TrainMnistFromFolder.py)</a></li>
                 
                 <li><a href="#trainingusingpython_createmodel">3-Create the CNN model(TrainMnistFromFolder.py)</a></li>
                 <li><a href="#trainingusingpython_trainmodel">4-Train the model(TrainMnistFromFolder.py)</a></li>
                 <li><a href="#trainingusingpython_savemodel">5-Save the model to file(TrainMnistFromFolder.py)</a></li>
+                <li><a href="#trainingusingpython_results">6-Results</a></li>
+                
             </ul>
         </li>
         <li>
             <a href="#csharpconsole">Using Tensorflow in a C# console application</a>
             <ul>
                 <li><a href="#csharpconsole_overview">Overview</a></li>
-                <li><a href="#csharpconsole_create">Create a console application</a></li>
-                <li><a href="#csharpconsole_loadmodel">Load the trained model file</a></li>
-                <li><a href="#csharpconsole_evaluateimage">Load the test image and evaluate using TensorflowSharp</a></li>
-                <li><a href="#csharpconsole_evaluateimage">Results</a></li>
+                <li><a href="#csharpconsole_create">1-Create a console application</a></li>
+                <li><a href="#csharpconsole_loadmodel">2-Load the trained model file</a></li>
+
+                <li><a href="#csharpconsole_imagetensor">3-Utils.ImageToTensorGrayScale</a></li>
+                <li><a href="#csharpconsole_quantized">4-Utis.Quantized</a></li>
+
+                <li><a href="#csharpconsole_evaluateimage">5-Load the test image and evaluate using TensorflowSharp</a></li>
+                <li><a href="#csharpconsole_evaluateimage">6-Results</a></li>
                 
             </ul>
         </li>
@@ -504,7 +510,7 @@ table.mnist thead td
                                 ----------------------
     </pre>
     <a href="#toc" title="Back to Table of Contents">Top</a>
-    <h3 id="trainingusingpython_loadimages">Training image files</h3>
+    <h3 id="trainingusingpython_loadimages">Image files used for training</h3>
     <p>
         MNIST dataset can be readily accessed from the <a href="https://scikit-learn.org/stable/auto_examples/classification/plot_digits_classification.html">scikit-learn</a> package.
         However in this tutorial I have demonstrated how to load the images from disk. The individual PNG files are made available in the accompanying project MNISpng.csproj.        
@@ -696,6 +702,9 @@ table.mnist thead td
         tf.train.write_graph(frozen_graph, "Out", "Mnist_model.pb", as_text=False)
         
     </pre>
+    <h3 id="trainingusingpython_results">6-Results</h3>
+    <img src="images/EpochProgress.PNG"/>
+    <br />
     <a href="#toc" title="Back to Table of Contents">Top</a>
 
 
@@ -717,27 +726,100 @@ table.mnist thead td
         -----------------------------------
 
     </pre>
-    <h3 id="csharpconsole_create">Create a Console application</h3>
+    <h3 id="csharpconsole_create">1-Create a Console application</h3>
     <ul>
         <li>
-            Create a new Console application using .NET Framework
+            Create a new Console application using .NET Framework (64 bit, 4.6.1 or above)
         </li>
         <li>
             Add NUGET package reference to TensorflowSharp
         </li>
     </ul>
-    <h3 id="csharpconsole_loadmodel">Load the trained model file</h3>
+    <a href="#toc" title="Back to Table of Contents">Top</a>
+    <h3 id="csharpconsole_loadmodel">2-Load the trained model file</h3>
     <pre>
-        TODO Show code snippet
-    </pre>
+        ///
+        ///Skeletal code using TensorFlowSharp
+        ///
+        var modelfile=@"c:\\MyTensorFlowModel.pb";//Produced by training
+        byte[] buffer = System.IO.File.ReadAllBytes(modelfile);
+        using (var graph = new TensorFlow.TFGraph())
+        {
+            graph.Import(buffer);
+            using (var session = new TensorFlow.TFSession(graph))
+            {   
+                var file="test.png";
+                var runner = session.GetRunner();
+                var tensor = Utils.ImageToTensorGrayScale(file);
+                runner.AddInput(graph["conv1_input"][0], tensor);
+                runner.Fetch(graph["activation_4/Softmax"][0]);
 
-    <h3 id="csharpconsole_evaluateimage">Load the test image and evaluate using TensorFlowSharp</h3>
+                var output = runner.Run();
+                var vecResults = output[0].GetValue();
+                float[,] results = (float[,])vecResults;
+                ///
+                /// Evaluate the results
+                ///
+                int[] quantized = Utils.Quantized(results);
+            }
+        }
+    </pre>
+    <a href="#toc" title="Back to Table of Contents">Top</a>
+    <h3 id="csharpconsole_imagetensor">3-Utils.ImageToTensorGrayScale</h3>
+    <p>This function will load a MNIST picture file and create a TFTensor </p>
+    <pre>
+        public static TensorFlow.TFTensor ImageToTensorGrayScale(string file)
+        {
+            using (System.Drawing.Bitmap image = (System.Drawing.Bitmap)System.Drawing.Image.FromFile(file))
+            {
+                var matrix = new float[1, image.Size.Height, image.Size.Width, 1];
+                for (var iy = 0; iy < image.Size.Height; iy++)
+                {
+                    for (int ix = 0, index = iy * image.Size.Width; ix < image.Size.Width; ix++, index++)
+                    {
+                        System.Drawing.Color pixel = image.GetPixel(ix, iy);
+                        matrix[0, iy, ix, 0] = pixel.B / 255.0f;
+                    }
+                }
+                TensorFlow.TFTensor tensor = matrix;
+                return tensor;
+            }
+        }
+
+    </pre>
+    <a href="#toc" title="Back to Table of Contents">Top</a>
+    <h3 id="csharpconsole_quantized">4-Utis.Quantized</h3>
+    <p>This function will convert the TF result into an array with 10 elements. The 0 th element represents the probability for 
+        digit 0 and element 9 th represents teh probability for digit 9
+    </p>
+    <pre>
+        //Silly repetitions here! I was running out of time.
+        internal static int[] Quantized(float[,] results)
+        {
+            int[] q = new int[]
+            {
+                results[0,0]>0.5?1:0,
+                results[0,1]>0.5?1:0,
+                results[0,2]>0.5?1:0,
+                results[0,3]>0.5?1:0,
+                results[0,4]>0.5?1:0,
+                results[0,5]>0.5?1:0,
+                results[0,6]>0.5?1:0,
+                results[0,7]>0.5?1:0,
+                results[0,8]>0.5?1:0,
+                results[0,9]>0.5?1:0,
+            };
+            return q;
+        }
+    </pre>
+    <a href="#toc" title="Back to Table of Contents">Top</a>
+    <h3 id="csharpconsole_evaluateimage">5-Load the test image and evaluate using TensorFlowSharp</h3>
     <pre>
         TODO Show code snippet
     </pre>
     <a href="#toc" title="Back to Table of Contents">Top</a>
     
-    <h3 id="csharpconsole_results">Results</h3>
+    <h3 id="csharpconsole_results">6-Results</h3>
     <p>Display test vs epoch
         Display some pictures which failed
         Possibly confusion matrix
