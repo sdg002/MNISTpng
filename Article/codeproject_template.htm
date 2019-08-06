@@ -126,7 +126,7 @@ table.mnist thead td
             </ul>
         </li>
         <li>
-            <a href="#tensorflowsharp">About TensorflowSharp</a>
+            <a href="#tensorflowsharp">About TensorflowSharp-Using Tensorflow from a C# application</a>
         </li>
         <li>
             <a href="#tensorflowgpu">Using Tensorflow with GPU</a>
@@ -327,12 +327,13 @@ table.mnist thead td
     <a href="#toc" title="Back to Table of Contents">Top</a>
     <h3 id="deeplearning_singleperceptrons">Single perceptron</h3>
     <img src="images/NeuronSingleNode.PNG"/>
-    <p>The circle represents the equation of a straight line in the form of a.x+b.y+c=0. </p>
+    <p>The blue circle represents the equation of a straight line in the form of a.x+b.y+c=0. </p>
     <img src="images/Neuron_LinearClassifier.PNG" />
     <p>Given two classes of points X and O, which are linearly separable, you can find a straight line which divides the 2 classes. 
         If you feed in the coordinates of the points in class X to the equation a.x+b.y+c and then do the same for all points in class O
-        then you are going to see that all points in class X produce a positive value , while all points in class O produce a negative value. 
-        The change of sign could be other way round , depending on the constants a,b and c. Nevertheless, this is the overarching principle of a Perceptron.
+        then you are going to see that all points in class X produce a positive value , while all points in class O produce a negative value (or vice versa). 
+        The change of sign could be other way round , depending on the constants a,b and c. Nevertheless, this is the overarching principle 
+        which goes makes the Perceptron behave as a linear classifier
     </p>
     <a href="#toc" title="Back to Table of Contents">Top</a>
     <h3 id="deeplearning_multi_perceptrons">Multi layer perceptrons</h3>
@@ -360,7 +361,36 @@ table.mnist thead td
 
 
     <h2><a id="tensorflowsharp"></a>TensorflowSharp - Using Tensorflow from a C# application</h2>
-    <p>TODO Talk about Tensorflow</p>
+    <p>TensorFlowSharp is a .NET wrapper over the unmanaged native libraries of TensorFlow. This is the outcome of the pioneering work 
+    done by <a href="https://github.com/migueldeicaza/TensorFlowSharp"><strong>Miguel de lcaza</strong></a>. 
+        TensorFlowSharp can consume a CNN model that was trained using Python and this opens up the possibility to create exciting end user applications.
+    
+    </p>
+    <pre>
+        nuget install TensorFlowSharp
+    </pre>
+    <pre>
+        ///
+        ///Skeletal code using TensorFlowSharp
+        ///
+        byte[] buffer = System.IO.File.ReadAllBytes(modelfile);
+        using (var graph = new TensorFlow.TFGraph())
+        {
+            graph.Import(buffer);
+            using (var session = new TensorFlow.TFSession(graph))
+            {   
+                /*
+                1)pick a test image
+                2)Created tensor object using this image
+                */
+                var runner = session.GetRunner();
+                runner.AddInput(...,tensor,)
+                runner.Fetch(...)
+                var output = runner.Run();
+            }
+        }
+    </pre>
+    <a href="#toc" title="Back to Table of Contents">Top</a>
 
 
     <h2 id="tensorflowgpu">Using Tensorflow with GPU</h2>
