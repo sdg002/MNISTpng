@@ -830,32 +830,35 @@ table.mnist thead td
         --------
                 |
                 |
-                MNISTPng
-                --------
+                MNISTPng (ZIP of individual PNG train and test files)
+                ------------------------------------------------------
                 |
                 |
-                PythonTrainer
-                -------------
+                PythonTrainer (Python script to train using TensorFlow)
+                -------------------------------------------------------
                 |
                 |
-                ConsoleAppTester
-                ----------------
+                ConsoleAppTester (C# console app using TensorFlowSharp)
+                -------------------------------------------------------
 
     </pre>
 
     <h3 id="usingthecode_pythontrainer">PythonTrainer</h3>
-    <p>
-        TODO Github
-
-        A brief description of how to use the article or code. The class names, the
-        methods and properties, any tricks or tips.
-    </p>
     <p>Python scripts for training a CNN model</p>
+    <ul>
+        <li><strong>TrainMnistFromFolder.py</strong>-Outermost Python script which loads and trains the images</li>
+        <li><strong>MnistImageLoader.py</strong>-Useful for converting a PNG into a Tensor</li>
+        <li><strong>FreezeKerasToTF.py</strong>-Useful for saving a trained model as .PB file</li>
+    </ul>
     <h3 id="usingthecode_mnistpng">MNISTPng</h3>
-    <p>to be done</p>
+    <p>ZIP of training and testing images</p>
+    <ul>
+        <li><strong>testing.zip</strong>-10,000 individual testing files organized into 10 directories</li>
+        <li><strong>training.zip</strong>-50,000 individual training files organized into 10 directories</li>
+    </ul>
     <h3 id="usingthecode_consoleapptester">ConsoleAppTester</h3>
     <p>C# EXE which will use TensorFlowSharp to load the trained model</p>
-    <a href="#toc" title="Back to Table of Contents">Top</a>
+    
    
 
     <h2 id="pointsofinterest">Points of Interest</h2>
