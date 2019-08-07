@@ -161,8 +161,7 @@ table.mnist thead td
                 <li><a href="#csharpconsole_imagetensor">3-Utils.ImageToTensorGrayScale</a></li>
                 <li><a href="#csharpconsole_quantized">4-Utis.Quantized</a></li>
 
-                <li><a href="#csharpconsole_evaluateimage">5-Load the test image and evaluate using TensorflowSharp</a></li>
-                <li><a href="#csharpconsole_evaluateimage">6-Results</a></li>
+                <li><a href="#csharpconsole_results">5-Results</a></li>
                 
             </ul>
         </li>
@@ -813,17 +812,13 @@ table.mnist thead td
         }
     </pre>
     <a href="#toc" title="Back to Table of Contents">Top</a>
-    <h3 id="csharpconsole_evaluateimage">5-Load the test image and evaluate using TensorFlowSharp</h3>
-    <pre>
-        TODO Show code snippet
-    </pre>
-    <a href="#toc" title="Back to Table of Contents">Top</a>
     
-    <h3 id="csharpconsole_results">6-Results</h3>
-    <p>Display test vs epoch
-        Display some pictures which failed
-        Possibly confusion matrix
+    <h3 id="csharpconsole_results">5-Results</h3>
+    <p>After iterating over all the 10,000 test images and classifying each of them through MNIST we get a prediction success rate of 98.5%. 150 images were misclassified. 
+        As per <a href="http://yann.lecun.com/exdb/mnist/">MNIST home page</a> , the state of the art benchmark is over 99.5% success rate.
     </p>
+    <img  src="images/Csharp_Test_Results.PNG"/>
+    <br />
     <a href="#toc" title="Back to Table of Contents">Top</a>
 
     <h2 id="usingthecode">Using the code</h2>

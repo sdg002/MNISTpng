@@ -104,7 +104,7 @@ print("Compilation complete");
 print("Train begin");
 # Train the model 
 
-total_epochs=3; #20
+total_epochs=20
 start = time.time()
 model.fit(
     train_data1, 
